@@ -11,8 +11,7 @@ window.requestAnimFrame = (function(){
 
 var doc = document,
     win = window,
-    $ = function (id) {return doc.getElementById(id);},
-    canvas = $('pong'),
+    canvas = $('#pong').get(0),
     ctx = canvas.getContext('2d'),
     width = canvas.width,
     height = canvas.height,
@@ -57,6 +56,8 @@ function moveBall() {
     }
 
     drawBall();
+
+    socket.emit('ball', {x : ballX, y : ballY});
 }
 
 function drawBall() {
@@ -81,7 +82,7 @@ window.addEventListener('mousemove', function (e) {
   rPaddlePos = e.pageY - paddleHeight / 2;
 }, false);
 
-$('start').addEventListener('click', function () {
+$('#start').bind('click', function () {
     if (!gameStarted) {
         gameStarted = true;
         gameLoop();
@@ -90,4 +91,4 @@ $('start').addEventListener('click', function () {
         gameStarted = false;
         this.textContent = 'start';
     }
-}, false);
+});
