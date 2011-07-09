@@ -21,8 +21,8 @@ var doc = document,
     ballRadius = 15,
     ballX = width / 2,
     ballY = height / 2,
-    incX = 10,
-    incY = 10,
+    incX = 5,
+    incY = 5,
     lPaddlePos = 0,
     rPaddlePos = 0,
     gameStarted = false;
@@ -47,13 +47,13 @@ function moveBall() {
     ballX += incX;
     ballY += incY;
     // console.log(ballX);
-    if(ballX+20 == width-ballRadius*2 && (ballY > rPaddlePos && ballY < rPaddlePos + paddleHeight )){
+    if (ballX + 25 >= (width - paddleWidth) && (ballY > rPaddlePos && ballY < rPaddlePos + paddleHeight )){
       incX = incX * -1;
       drawBall();
       return;
     }
     
-    if(ballX == width+ballRadius*2 && (ballY > lPaddlePos && ballY < lPaddlePos + paddleHeight )){
+    if(ballX <= paddleWidth && (ballY > lPaddlePos && ballY < lPaddlePos + paddleHeight )){
       incX = incX * -1;
       drawBall();
       return;
