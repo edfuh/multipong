@@ -77,16 +77,8 @@ function gameLoop() {
     }
 }
 
-doc.addEventListener('keypress', function (e) {
-    //38 up 40 down
-    switch (e.keyCode) {
-        case 38:
-            rPaddlePos -= 10;
-            break;
-        case 40:
-            rPaddlePos += 10;
-            break;
-    }
+window.addEventListener('mousemove', function (e) {
+  rPaddlePos = e.pageY - paddleHeight / 2;
 }, false);
 
 $('start').addEventListener('click', function () {
