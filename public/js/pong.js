@@ -47,7 +47,19 @@ function drawPaddle(s) {
 function moveBall() {
     ballX += incX;
     ballY += incY;
-
+    // console.log(ballX);
+    if(ballX+20 == width-ballRadius*2 && (ballY > rPaddlePos && ballY < rPaddlePos + paddleHeight )){
+      incX = incX * -1;
+      drawBall();
+      return;
+    }
+    
+    if(ballX == width+ballRadius*2 && (ballY > lPaddlePos && ballY < lPaddlePos + paddleHeight )){
+      incX = incX * -1;
+      drawBall();
+      return;
+    }
+    
     if (ballX < 1 || ballX >= (width - ballRadius*2)) {
         incX = incX * -1;
     }
@@ -71,14 +83,16 @@ function drawBall() {
 function gameLoop() {
     drawPaddle();
     moveBall();
-
+    // console.log(ballX)
     if (gameStarted) {
         requestAnimFrame(gameLoop);
     }
 }
 
 window.addEventListener('mousemove', function (e) {
+  ctx.save();
   rPaddlePos = e.pageY - paddleHeight / 2;
+  ctx.restore();
 }, false);
 
 $('start').addEventListener('click', function () {
